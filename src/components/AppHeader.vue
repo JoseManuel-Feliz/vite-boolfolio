@@ -1,11 +1,19 @@
 <script>
+import NavTitle from './navBarComponents/NavbarTitle.vue';
 export default {
+
+    name: "AppHeader",
+
     data() {
         return {
+            title: "My Projects",
+        };
+    },
+    components: {
+        NavTitle,
+    },
 
-        }
-    }
-}
+};
 </script>
 
 <template>
@@ -15,8 +23,8 @@ export default {
 
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <!-- Todo title (or maybe a logo) -->
-                    <a class="navbar-brand" href="#">My Projects</a>
+                    <!-- Navbar Title -->
+                    <NavTitle :title="title" />
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
