@@ -9,13 +9,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      apiUri: 'http://127.0.0.1:8000/api/projects',
     }
-  },
-  mounted() {
-    axios.get(this.apiUri).then(response => {
-      console.log(response);
-    });
   },
   components: {
     AppHeader,
