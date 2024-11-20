@@ -1,13 +1,17 @@
 <script>
 export default {
     name: 'ProjectsListCard',
-    props: {},
-    data() {
-        return {
+    props: {
+        project: {
+            type: Object,
+            required: true,
+        },
+        data() {
+            return {
 
+            }
         }
     }
-}
 </script>
 
 <template>
