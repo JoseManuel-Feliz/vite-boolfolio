@@ -1,13 +1,21 @@
 <script>
 export default {
     name: 'AppPagination',
-    props: {},
-    data() {
-        return {
+    props: {
+        currentPage: {
+            type: Number,
+            required: true,
+        },
+        lastPage: {
+            type: Number,
+            required: true,
+        },
+        data() {
+            return {
 
+            }
         }
     }
-}
 </script>
 
 <template>
