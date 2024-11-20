@@ -14,7 +14,14 @@ export default {
             return {
 
             }
-        }
+        } computed: {
+            FirstPage() {
+                return this.currentPage === 1;
+            },
+            LastPage() {
+                return this.currentPage === this.lastPage;
+            },
+        },
     }
 </script>
 
