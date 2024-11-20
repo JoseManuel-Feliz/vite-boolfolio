@@ -3,8 +3,6 @@
 import AppHeader from "./components/AppHeader.vue";
 // Imported AppFooter
 import AppFooter from "./components/AppFooter.vue";
-// Imported Axios
-import axios from 'axios';
 
 export default {
   data() {
