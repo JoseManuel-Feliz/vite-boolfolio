@@ -2,12 +2,20 @@
 // Imported Axios
 import axios from "axios";
 
+import ProjectsListCard from "./ProjectsListCard.vue"
+import AppPagination from "../AppPagination.vue"
+
 export default {
     name: "ProjectsList",
+    components: {
+        ProjectsListCard,
+        AppPagination,
+    },
     data() {
         return {
             apiUri: "http://127.0.0.1:8000/api/projects",
             projects: [],
+            pageLinks: [],
             currentPage: 1,
             lastPage: 1
 
@@ -23,42 +31,45 @@ export default {
                 .then((response) => {
                     console.log(response.data.results);
                     console.log(pageNumber);
-                    this.projects = response.data.results.data;
-                    this.currentPage = response.data.current_page;
-                    this.lastPage = response.data.last_page;
+                    const data = response.data.results;
+                    this.projects = data.data;
+                    this.lastPage = data.last_page;
+                    this.currentPage = pageNumber;
                 })
+
                 .catch(function (error) {
                     console.log(error);
                 });
         },
-        changePage(newPage) {
-            this.getProjects(newPage);
-
-
-        }
-    },
-    mounted() {
-        this.getProjects(1);
-    },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.getProjects(this.currentPage - 1);
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.lastPage) {
+                this.getProjects(this.currentPage + 1);
+            }
+        },
+        changePage(pageNumber) {
+            this.getProjects(pageNumber);
+        },
+        mounted() {
+            this.getProjects(1);
+        },
+    }
 }
+
 </script>
 
 <template>
 
     <section>
-
-        <h1>My Projects</h1>
-
-        <div v-for="project in projects" :key="project.id">
-            <h2>{{ project.project_title }}</h2>
-
-            <p>{{ project.summary }}</p>
-
-            <span>{{ project.type.project_type }}</span>
-
+        <div v-if="projects.length">
+            <ProjectsListCard v-for="project in projects" :key="project.id" :project="project" />
         </div>
-
-
+        <AppPagination :currentPage="currentPage" :lastPage="lastPage" @previousPage="previousPage" @nextPage="nextPage"
+            @changePage="changePage" />
     </section>
 </template>
 
