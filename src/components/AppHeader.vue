@@ -1,6 +1,6 @@
 <script>
-import NavTitle from './navBarComponents/NavbarTitle.vue';
-import NavLinks from './navBarComponents/NavbarLinks.vue';
+import NavTitle from "./NavBarComponents/NavbarTitle.vue";
+import NavLinks from "./NavBarComponents/NavbarLinks.vue";
 export default {
 
     name: "AppHeader",

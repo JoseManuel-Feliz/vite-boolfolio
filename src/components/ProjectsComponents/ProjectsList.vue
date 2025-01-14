@@ -20,6 +20,13 @@ export default {
             lastPage: 1
 
         }
+    }, computed: {
+        isFirstPage() {
+            return this.currentPage === 1;
+        },
+        isLastPage() {
+            return this.currentPage === this.lastPage;
+        },
     },
     methods: {
         getProjects(pageNumber) {
@@ -42,12 +49,12 @@ export default {
                 });
         },
         previousPage() {
-            if (this.currentPage > 1) {
+            if (!this.isFirstPage) {
                 this.getProjects(this.currentPage - 1);
             }
         },
         nextPage() {
-            if (this.currentPage < this.lastPage) {
+            if (!this.isLastPage) {
                 this.getProjects(this.currentPage + 1);
             }
         },
@@ -65,12 +72,17 @@ export default {
 <template>
 
     <section>
-        <div v-if="projects.length">
-            <ProjectsListCard v-for="project in projects" :key="project.id" :project="project" />
+        <div v-if="projects.length" class="row row-cols-3 g-3">
+            <div class="col">
+                <ProjectsListCard v-for="project in projects" :key="project.id" :project="project" />
+            </div>
         </div>
-        <AppPagination :currentPage="currentPage" :lastPage="lastPage" @previousPage="previousPage" @nextPage="nextPage"
-            @changePage="changePage" />
     </section>
+
+    <div class="my-4">
+        <AppPagination :currentPage="currentPage" :lastPage="lastPage" :isFirstPage="isFirstPage"
+            :isLastPage="isLastPage" @previousPage="previousPage" @nextPage="nextPage" @changePage="changePage" />
+    </div>
 </template>
 
 <style scoped></style>
